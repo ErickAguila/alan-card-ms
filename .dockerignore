@@ -1,0 +1,13 @@
+kubectl-files
+deployment
+product
+.idea
+.nyc_output
+.vscode
+.env
+npm-debug.log
+chart
+.git*
+Dockerfile
+README.md
+.dockerignore
