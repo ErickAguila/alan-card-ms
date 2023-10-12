@@ -1,9 +1,11 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class CreateDb1697055753406 implements MigrationInterface {
-    name = 'CreateDb1697055753406'
+export class CambioLargoClavev1697129884366 implements MigrationInterface {
+    name = 'CambioLargoClavev1697129884366'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`ALTER TABLE "usuario" DROP COLUMN "clave"`);
+        await queryRunner.query(`ALTER TABLE "usuario" ADD "clave" character varying(255) NOT NULL`);
         await queryRunner.query(`ALTER TABLE "orden" DROP CONSTRAINT "FK_7d22952b51137bd0398705c87c5"`);
         await queryRunner.query(`ALTER TABLE "orden" DROP CONSTRAINT "FK_fa2e5f9aa82519c88adf15b616e"`);
         await queryRunner.query(`ALTER TABLE "orden" ALTER COLUMN "idCarta" SET NOT NULL`);
@@ -31,6 +33,8 @@ export class CreateDb1697055753406 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "orden" ALTER COLUMN "idCarta" DROP NOT NULL`);
         await queryRunner.query(`ALTER TABLE "orden" ADD CONSTRAINT "FK_fa2e5f9aa82519c88adf15b616e" FOREIGN KEY ("idUsuario") REFERENCES "usuario"("idUsuario") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "orden" ADD CONSTRAINT "FK_7d22952b51137bd0398705c87c5" FOREIGN KEY ("idCarta") REFERENCES "carta"("idCarta") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "usuario" DROP COLUMN "clave"`);
+        await queryRunner.query(`ALTER TABLE "usuario" ADD "clave" character varying(50) NOT NULL`);
     }
 
 }

@@ -24,7 +24,7 @@ export class Usuario {
   @Column({ type: 'varchar', length: 100, name: 'email' })
   email: string;
 
-  @Column({ type: 'varchar', length: 50, name: 'clave' })
+  @Column({ type: 'varchar', length: 255, name: 'clave' })
   clave: string;
 
   @OneToOne(() => TipoUsuario, (tipoUsuario) => tipoUsuario.usuario)
@@ -35,7 +35,7 @@ export class Usuario {
   idTipoUsuario: number;
 
   @CreateDateColumn({ type: 'timestamp', name: 'fechaCreacion' })
-  fechaCreacion: string;
+  fechaCreacion?: Date;
 
   @OneToMany(() => Orden, (orden) => orden.usuario)
   Ordenes?: Orden[];

@@ -32,7 +32,7 @@ export class UsuarioDto {
 
   @IsNotEmpty()
   @IsString()
-  @MaxLength(50)
+  @MaxLength(255)
   @ApiProperty()
   clave: string;
 
@@ -40,7 +40,4 @@ export class UsuarioDto {
   @Min(1)
   @ApiProperty()
   idTipoUsuario: number;
-
-  @ApiProperty()
-  fechaCreacion: string;
 }

@@ -12,7 +12,6 @@ export class UsuarioMapper {
       email: usuarioDto.email,
       clave: usuarioDto.clave,
       idTipoUsuario: usuarioDto.idTipoUsuario,
-      fechaCreacion: usuarioDto.fechaCreacion,
     };
     return usuarioEntity;
   }
@@ -25,7 +24,6 @@ export class UsuarioMapper {
       email: usuarioEntity.email,
       clave: usuarioEntity.clave,
       idTipoUsuario: usuarioEntity.idTipoUsuario,
-      fechaCreacion: usuarioEntity.fechaCreacion,
     };
     return usuarioDto;
   }

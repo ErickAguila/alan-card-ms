@@ -10,6 +10,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configVar } from './shared/configVar';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TipoUsuariosModule } from './modules/tipo-usuarios/tipo-usuarios.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { TipoUsuariosModule } from './modules/tipo-usuarios/tipo-usuarios.module
     TipoCartasModule,
     HabilidadesModule,
     TipoUsuariosModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

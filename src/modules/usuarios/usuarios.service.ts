@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { UsuarioDto } from './dto/usuario.dto';
 import { Usuario } from './entities/usuario.entity';
 import { UsuarioMapper } from './mappers/usuarioMapper';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsuariosService {
@@ -14,6 +15,7 @@ export class UsuariosService {
   ) {}
 
   async create(createUsuarioDto: UsuarioDto) {
+    createUsuarioDto.clave = await bcrypt.hash(createUsuarioDto.clave, 10);
     const usuarioEntity = this.mapper.dtoToEntity(createUsuarioDto);
     const usuario = await this.usuarioRepository.save(usuarioEntity);
     createUsuarioDto.idUsuario = usuario.idUsuario;
@@ -48,5 +50,11 @@ export class UsuariosService {
     });
     if (!usuario) throw new NotFoundException('Usuario no existe');
     return await this.usuarioRepository.delete(id);
+  }
+
+  async findByEmail(email: string) {
+    return await this.usuarioRepository.findOneBy({
+      email: email,
+    });
   }
 }
