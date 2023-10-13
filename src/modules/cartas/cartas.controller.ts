@@ -6,12 +6,16 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { CartasService } from './cartas.service';
 import { CartaDto } from './dto/carta.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+@ApiBearerAuth()
 @ApiTags('cartas')
+@UseGuards(JwtAuthGuard) // se protege todos los endpoint de este controller
 @Controller('cartas')
 export class CartasController {
   constructor(private readonly cartasService: CartasService) {}

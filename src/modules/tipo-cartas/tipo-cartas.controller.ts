@@ -6,12 +6,16 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { TipoCartasService } from './tipo-cartas.service';
 import { TipoCartaDto } from './dto/tipo-carta.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+@ApiBearerAuth()
 @ApiTags('tipo-cartas')
+@UseGuards(JwtAuthGuard) // se protege todos los endpoint de este controller
 @Controller('tipo-cartas')
 export class TipoCartasController {
   constructor(private readonly tipoCartasService: TipoCartasService) {}
