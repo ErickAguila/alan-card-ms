@@ -1,4 +1,7 @@
-export const configVar = () => ({
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+export const configVar = {
   NODE_ENV: process.env.NODE_ENV,
   PORT: Number(process.env.PORT) || 3000,
   NODE_NAME: process.env.NODE_ENV,
@@ -10,4 +13,7 @@ export const configVar = () => ({
     database: process.env.DB_NAME,
     synchronize: process.env.DB_SYNC,
   },
-});
+  jwt_secret: process.env.JWT_SECRET || 'hola',
+};
+
+export const configEnv = () => configVar;

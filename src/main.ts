@@ -14,6 +14,7 @@ async function bootstrap() {
 
   // Configuración de swagger
   const options = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('card-ms')
     .setDescription('microservicio')
     .setVersion('1.0')

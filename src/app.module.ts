@@ -7,7 +7,7 @@ import { HabilidadesModule } from './modules/habilidades/habilidades.module';
 import { Configuration } from './shared/env.enum';
 import { LoggerMiddleware } from './shared/logger-middleware/logger.middleware';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { configVar } from './shared/configVar';
+import { configEnv } from './shared/configVar';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TipoUsuariosModule } from './modules/tipo-usuarios/tipo-usuarios.module';
 import { AuthModule } from './modules/auth/auth.module';
@@ -16,7 +16,7 @@ import { AuthModule } from './modules/auth/auth.module';
   imports: [
     ConfigModule.forRoot({
       envFilePath: `environment/${process.env.NODE_ENV.toLowerCase()}.env`,
-      load: [configVar],
+      load: [configEnv],
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -49,7 +49,7 @@ export class AppModule {
   constructor(private readonly configService: ConfigService) {
     const logger = new Logger(AppModule.name);
     AppModule.port = this.configService.get(Configuration.PORT);
-    logger.verbose(`CONFIG_VAR: => ${JSON.stringify(configVar())}`);
+    logger.verbose(`CONFIG_VAR: => ${JSON.stringify(configEnv())}`);
     logger.log(
       `Configure on ENV: ${this.configService.get(Configuration.NODE_ENV)}`,
     );
